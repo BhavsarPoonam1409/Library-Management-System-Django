@@ -1,0 +1,61 @@
+{% extends 'library/base.html' %}
+
+{% block title %}Home | College Library{% endblock %}
+
+{% block content %}
+
+<div class="welcome-box">
+    <h1>Welcome to College Library 📚</h1>
+
+    <p>
+        Manage books, student records and book issues easily
+        using the Library Management System.
+    </p>
+
+    <a href="{% url 'book_list' %}" class="btn btn-primary">
+        Explore Books
+    </a>
+
+    <a href="{% url 'issue_book' %}" class="btn btn-success">
+        Issue a Book
+    </a>
+</div>
+
+<h2 class="page-heading">Library Management</h2>
+
+<p class="page-description">
+    Select an option to manage your library records.
+</p>
+
+<div class="card-grid">
+
+    <div class="dashboard-card">
+        <div class="card-icon">📚</div>
+        <h3>Manage Books</h3>
+        <p>Add new books, view book details and update or delete records.</p>
+        <a href="{% url 'book_list' %}" class="btn btn-primary">
+            View Books
+        </a>
+    </div>
+
+    <div class="dashboard-card">
+        <div class="card-icon">🎓</div>
+        <h3>Manage Students</h3>
+        <p>Maintain student names, enrollment numbers and courses.</p>
+        <a href="{% url 'student_list' %}" class="btn btn-primary">
+            View Students
+        </a>
+    </div>
+
+    <div class="dashboard-card">
+        <div class="card-icon">📖</div>
+        <h3>Issued Books</h3>
+        <p>View issued books, student details and issue or return dates.</p>
+        <a href="{% url 'issue_list' %}" class="btn btn-primary">
+            View Records
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

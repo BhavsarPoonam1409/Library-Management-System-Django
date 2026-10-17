@@ -1,0 +1,83 @@
+{% extends 'library/base.html' %}
+
+{% block title %}Issued Books | College Library{% endblock %}
+
+{% block content %}
+
+<h1 class="page-heading">Issued Books</h1>
+
+<p class="page-description">
+    View issued books and manage their return status.
+</p>
+
+<div style="margin-bottom: 20px;">
+    <a href="{% url 'issue_book' %}" class="btn btn-primary">
+        + Issue New Book
+    </a>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Book Name</th>
+                <th>Student Name</th>
+                <th>Issue Date</th>
+                <th>Return Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for issue in issues %}
+            <tr>
+                <td>{{ issue.book.book_name }}</td>
+                <td>{{ issue.student.name }}</td>
+                <td>{{ issue.issue_date }}</td>
+
+                <td>
+                    {{ issue.return_date|default:"Not Returned" }}
+                </td>
+
+                <td>
+                    {% if issue.status == 'Issued' %}
+                        <span class="status status-issued">
+                            Issued
+                        </span>
+                    {% else %}
+                        <span class="status status-returned">
+                            Returned
+                        </span>
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if issue.status == 'Issued' %}
+                    <form method="POST"
+                          action="{% url 'return_book' issue.id %}"
+                          style="margin: 0; padding: 0; box-shadow: none; border: none; width: auto;">
+                        {% csrf_token %}
+
+                        <button type="submit" class="btn btn-success">
+                            Return Book
+                        </button>
+                    </form>
+                    {% else %}
+                        <span>Completed</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            {% empty %}
+            <tr>
+                <td colspan="6" class="empty-message">
+                    No books have been issued yet.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

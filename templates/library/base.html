@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Library Management System{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+   
+    <header class="header">
+        <div class="header-container">
+            <a href="{% url 'home' %}" class="logo">
+                <span class="logo-icon">📚</span>
+                <span>College Library</span>
+            </a>
+
+            <p class="header-text">Library Management System</p>
+        </div>
+    </header>
+
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{% url 'home' %}" class="nav-link">Home</a>
+            <a href="{% url 'book_list' %}" class="nav-link">Books</a>
+            <a href="{% url 'student_list' %}" class="nav-link">Students</a>
+            <a href="{% url 'issue_list' %}" class="nav-link">Issued Books</a>
+            <a href="{% url 'issue_book' %}" class="nav-link issue-link">+ Issue Book</a>
+        </div>
+    </nav>
+
+   
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+   
+    <footer class="footer">
+        <p>© 2026 College Library Management System</p>
+        <p>Manage Books • Manage Students • Track Issued Books</p>
+        <h3>Create by poonam bhavsar</h3>
+    </footer>
+
+</body>
+</html>
